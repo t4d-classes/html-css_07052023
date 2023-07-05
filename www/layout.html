@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Layout</title>
+  <style>
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+
+      display: grid;
+      grid-template-areas: 
+        "header header"
+        "menu menu"
+        "content sidebar"
+        "footer footer";
+
+      grid-template-columns: 3fr 1fr;
+      grid-template-rows: 70px 40px 1fr 70px;
+    }
+
+    #page-header, #page-footer {
+      background-color: #32396F;
+      color: white;
+    }
+
+    #page-header {
+      grid-area: header;
+      padding: 0px 20px;
+
+      display: flex;
+      flex-direction: row; /* sets the major axis */
+      justify-content: space-between; /* alignment on major axis */
+      align-items: center; /* alignment on minor axis */
+    }
+
+
+    #main-menu {
+      grid-area: menu;
+      padding-left: 20px;
+      background-color: darkgoldenrod;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-item {
+      margin: 4px;
+    }
+
+    .menu-item > a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    .menu-item > a:hover {
+      text-decoration: underline;
+    }
+
+
+    #content, #sidebar {
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    #content {
+      grid-area: content;
+    }
+
+    #sidebar {
+      grid-area: sidebar;
+      background-color: orangered;
+      color: white;
+    }
+
+    #page-footer {
+      grid-area: footer;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .modal-dialog {
+      z-index: 999;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-dialog > form {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      border: solid 1px black;
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .modal-dialog > form > * {
+      margin: 4px;
+    }
+
+    .modal-dialog.modal-dialog-show {
+      display: flex;
+    }
+
+  </style>
+  <script defer>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const contactMeButton = document.querySelector("header > button");
+
+      contactMeButton.addEventListener("click", () => {
+        document.querySelector(".modal-dialog").classList.toggle("modal-dialog-show");
+      });
+
+      const submitContactForm = document.querySelector(".modal-dialog form");
+
+      submitContactForm.addEventListener("submit", (evt) => {
+        evt.preventDefault();
+        console.log("submit contact form");
+        document.querySelector(".modal-dialog").classList.toggle("modal-dialog-show");
+      });
+
+    });
+
+  </script>
+</head>
+<body>
+
+  <div class="container">
+
+  <header id="page-header">
+
+    <h1>Tools App</h1>
+
+    <button>Contact Me</button>
+
+  </header>
+
+  <nav id="main-menu">
+    <menu class="menu">
+      <li class="menu-item"><a href="#">Home</a></li>
+      <li class="menu-item"><a href="#">Color Tool</a></li>
+      <li class="menu-item"><a href="#">Car Tool</a></li>
+      <li class="menu-item"><a href="#">Calc Tool</a></li>
+    </menu>
+  </nav>
+
+  <main id="content">
+    <article>
+      <header>
+        <h2>Top 5 Challenges of CSS</h2>
+      </header>
+      <p>CSS (Cascading Style Sheets) is an integral part of web development, allowing developers to style and format web pages. While CSS offers tremendous flexibility and control over the visual aspects of a website, it also presents its fair share of challenges. Here are the top five challenges faced when working with CSS:</p>
+      <p>1. Cross-Browser Compatibility: One of the most significant challenges is ensuring consistent rendering across different web browsers. Each browser has its own rendering engine and interpretation of CSS specifications, leading to variations in how styles are applied. Developers must thoroughly test and tweak their CSS code to ensure compatibility with major browsers like Chrome, Firefox, Safari, and Edge.</p>
+      <p>2. Specificity and Inheritance: CSS follows a specific hierarchy when applying styles, which can lead to conflicts and unexpected outcomes. The concept of specificity determines which styles take precedence over others, and inheritance allows properties to be passed down from parent elements to their children. Understanding these concepts and managing them effectively is crucial to achieving the desired styling results.</p>
+      <p>3. Responsive Design: With the increasing use of mobile devices, responsive design has become essential. Creating a responsive layout that adapts seamlessly to different screen sizes and resolutions requires careful planning and implementation. CSS media queries and flexible units like percentages and viewport-relative values play a vital role, but it can be challenging to achieve consistent responsiveness across all devices.</p>
+      <p>4. CSS Code Maintainability: As a project grows, managing CSS code can become complex and challenging. Without proper organization and structure, stylesheets can become bloated, making it difficult to locate specific styles or make changes efficiently. Adopting methodologies like CSS preprocessors (e.g., Sass, Less) or using modular CSS approaches (e.g., BEM, SMACSS) can help improve code maintainability.</p>
+      <p>5. Browser DevTools: While browser developer tools are immensely useful for debugging and inspecting web pages, mastering their intricacies can be a learning curve. Each browser has its set of DevTools, with variations in features, user interface, and keyboard shortcuts. Gaining familiarity with these tools can greatly assist in troubleshooting CSS issues and optimizing performance.</p>
+      <p>Working with CSS can be both exciting and challenging. Overcoming these challenges requires a solid understanding of CSS fundamentals, consistent testing, and continuous learning to keep up with evolving web standards. By embracing best practices and employing efficient strategies, developers can navigate the complexities of CSS and create visually stunning and responsive web experiences.</p>
+    </article>
+  </main>
+
+  <aside id="sidebar">
+    <p>Name: Captain Inkbeard</p>
+    <p>Bio:</p>
+    <p>Introducing Captain Inkbeard, the swashbuckling blog writer who navigates the treacherous seas of the digital realm while moonlighting as a pirate of the written word. With a parrot perched on his shoulder and a quill in hand, Captain Inkbeard fearlessly sets sail on a quest to share tales of adventure, creativity, and plundering knowledge.</p>
+    <p>Born on the stormy shores of literary fascination, Captain Inkbeard developed a passion for both writing and the high seas at a young age. Embracing the spirit of piracy, he dons his tricorn hat and harnesses the power of words to capture the hearts of readers and transport them to uncharted territories of imagination.</p>
+    <p>Captain Inkbeard's writing style is as bold and vibrant as his pirate persona, blending gripping storytelling with a touch of wit and mischief. From uncovering hidden treasures of inspiration to exploring uncharted territories of creativity, his blog offers a bounty of literary riches that leave readers craving for more.</p>
+    <p>When the sun sets and the moon rises, Captain Inkbeard embarks on daring escapades as a true buccaneer of the seven seas. Armed with a cutlass and a quill, he dances between battles on deck and weaving tales in the captain's quarters, leaving an indelible mark on both the digital world and the vast ocean.</p>
+    <p>Join Captain Inkbeard's crew on his blog as he invites you to embark on a thrilling voyage where words become weapons and stories become treasures. Set sail with this charismatic pirate-blogger and prepare to be swept away by the irresistible allure of the literary sea. Ahoy, mateys!</p>
+  </aside>
+
+  <footer id="page-footer">
+    <small>&copy; 2023 Crazy Life Productions, Pvt Ltd</small>
+  </footer>
+
+  </div>
+
+  <div class="modal-dialog">
+    <form action="#" method="POST" id="contact-form">
+      <header>
+        <h3>Contact Form</h3>
+      </header>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+    
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone">
+    
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+    
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  
+</body>
+</html>
